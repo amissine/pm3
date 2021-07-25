@@ -95,10 +95,9 @@ export const config = // {{{1
       init: c => {
         console.log('- init', c.name)
         let width = 400, height = 200,
-          left = window.innerWidth - width + 15, top = 40
+          left = window.innerWidth - width + 25, top = 40
         let windowObjectReference = window.open(
-          //'http://localhost:5001', '_blank',
-          'http://google.com', '_blank',
+          'http://localhost:5001', '_blank',
           `width=${width},height=${height},left=${left},top=${top}`)
       },
     },
