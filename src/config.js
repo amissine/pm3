@@ -99,6 +99,7 @@ export const config = // {{{1
         let windowObjectReference = window.open(
           'http://localhost:5001', '_blank',
           `width=${width},height=${height},left=${left},top=${top}`)
+        return windowObjectReference;
       },
     },
   ],

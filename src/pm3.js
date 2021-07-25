@@ -24,6 +24,7 @@ export default function pm3 (config, ts, data, opts) {
   }
 
   let plot, historyEdge, freezing = false, freeze = false
+  let commandWindows = []
 
   function colorX (x) // {{{1
   {
@@ -165,7 +166,9 @@ export default function pm3 (config, ts, data, opts) {
       return;
     }
     ts.obAdd(data, m.data, historyEdge)
-    //console.log(data)
+    for (const cw of commandWindows) {
+      cw.postMessage(m.data, '*') // FIXME
+    }
   }
 
   function plotInit (base, quote) // {{{1
@@ -173,7 +176,7 @@ export default function pm3 (config, ts, data, opts) {
     plot = new uPlot(opts, data, document.getElementById('plot'))
 
     for (const command of config.commands) {
-      command.init(command)
+      commandWindows.push(command.init(command))
     }
     for (let exchange of config.exchanges) {
       exchange.worker.onmessage = plotAddData
